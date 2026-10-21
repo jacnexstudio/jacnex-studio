@@ -1,0 +1,26 @@
+name: Compilar Jacnex Studio
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Versión original (vacío: la última)"
+        type: string
+        default: ""
+      publicar:
+        description: "Publicar la versión"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+jobs:
+  compilar:
+    uses: jacnexstudio/jacnex-build/.github/workflows/compilar-windows.yml@main
+    with:
+      proyecto: launcher
+      upstream: storytold/craft-launcher
+      nombre: Jacnex Studio
+      ref: ${{ inputs.ref }}
+      publicar: ${{ inputs.publicar }}
